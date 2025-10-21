@@ -10,35 +10,56 @@
   <label for="seconds">Ingresa segundos:</label>
   <input type="number" id="seconds" min="1" />
   <button id="startBtn">Iniciar</button>
+  <button id="pauseBtn">Pausar</button>
 
   <h2 id="countdown">00</h2>
 
   <script>
-    let intervalId;
+    let intervalId = null;
+    let timeLeft = 0;
+    let isPaused = false;
 
-    document.getElementById("startBtn").addEventListener("click", function () {
-      const input = document.getElementById("seconds");
-      let timeLeft = parseInt(input.value);
+    const countdownEl = document.getElementById("countdown");
+    const inputEl = document.getElementById("seconds");
+    const startBtn = document.getElementById("startBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
 
-      if (isNaN(timeLeft) || timeLeft <= 0) {
-        alert("Por favor, ingresa un número válido.");
-        return;
-      }
-
-      clearInterval(intervalId); // Evitar múltiples temporizadores
-
-      document.getElementById("countdown").textContent = timeLeft;
-
-      intervalId = setInterval(() => {
-        timeLeft--;
-        document.getElementById("countdown").textContent = timeLeft;
-
-        if (timeLeft <= 0) {
-          clearInterval(intervalId);
-          document.getElementById("countdown").textContent = "¡Tiempo terminado!";
+    startBtn.addEventListener("click", function () {
+      if (!intervalId) {
+        // Si no hay intervalo activo, comenzar o continuar
+        if (!isPaused) {
+          // Si no está en pausa, tomar el valor del input
+          timeLeft = parseInt(inputEl.value);
+          if (isNaN(timeLeft) || timeLeft <= 0) {
+            alert("Por favor, ingresa un número válido.");
+            return;
+          }
         }
-      }, 1000);
+
+        countdownEl.textContent = timeLeft;
+        intervalId = setInterval(() => {
+          timeLeft--;
+          countdownEl.textContent = timeLeft;
+
+          if (timeLeft <= 0) {
+            clearInterval(intervalId);
+            intervalId = null;
+            countdownEl.textContent = "¡Tiempo terminado!";
+          }
+        }, 1000);
+
+        isPaused = false;
+      }
+    });
+
+    pauseBtn.addEventListener("click", function () {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        isPaused = true;
+      }
     });
   </script>
 </body>
 </html>
+

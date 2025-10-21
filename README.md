@@ -29,11 +29,17 @@ Estos métodos son útiles para:
 4.Actualización de contenido en tiempo real (como relojes, contadores, etc.)
 
 # Principales métodos relacionados con intervalos
-Método	                            Descripción
-1.setTimeout(function, delay)     	Ejecuta una función después de un retraso (enmilisegundos).
-2.clearTimeout(id)	                Cancela una función programada con setTimeout.
-3.setInterval(function, delay)	    Ejecuta una función repetidamente cada cierto tiempo.
-4.clearInterval(id)	                Detiene la ejecución repetitiva programada con setInterval.
+Método	                            
+1.setTimeout(function, delay)     
+2.clearTimeout(id)	                
+3.setInterval(function, delay)	    
+4.clearInterval(id)	              
+
+Descripción
+1.Ejecuta una función después de un retraso (enmilisegundos).
+2.Cancela una función programada con setTimeout.
+3.Ejecuta una función repetidamente cada cierto tiempo.
+4.Detiene la ejecución repetitiva programada con setInterval.
 
 # Propiedades relacionadas
 
